@@ -1,3 +1,65 @@
+/***********************
+ * Type Conversion vs Type Coercion in JavaScript
+ ***********************/
+
+/*
+  TYPE CONVERSION (Explicit)
+  You manually convert a value from one type to another.
+ */
+
+// String Conversion
+console.log(String(123)); // "123"
+console.log(String(true)); // "true"
+
+// Number Conversion
+console.log(Number("456")); // 456
+console.log(Number(false)); // 0
+
+// Boolean Conversion
+console.log(Boolean(0)); // false
+console.log(Boolean("hello")); // true
+
+// Parsing strings to numbers
+console.log(parseInt("42px")); // 42
+console.log(parseFloat("3.14")); // 3.14
+
+/*
+ TYPE COERCION (Implicit)
+ JavaScript automatically converts types behind the scenes.
+*/
+
+// String and Number
+console.log("5" + 1); // "51" (1 is coerced to string)
+console.log("5" - 1); // 4   ("5" is coerced to number)
+console.log("5" * "2"); // 10  (both are coerced to numbers)
+
+// Boolean Coercion
+console.log(true + 1); // 2   (true → 1)
+console.log(false + 1); // 1   (false → 0)
+
+// null and undefined
+console.log(null + 5); // 5   (null → 0)
+console.log(undefined + 1); // NaN (undefined → NaN)
+
+// Comparison with Coercion
+console.log(0 == false); // true
+console.log("5" == 5); // true
+console.log(null == undefined); // true
+
+// === avoids coercion (strict equality)
+console.log("5" === 5); // false
+console.log(0 === false); // false
+
+/**
+ * SUMMARY
+ * - Type Conversion = You do it explicitly.
+ * - Type Coercion = JavaScript does it for you.
+ * - Prefer === and !== to avoid surprises in comparisons.
+ */
+
+
+
+
 // ======================================================
 //  1. Arithmetic & Comparison Operators
 // ======================================================

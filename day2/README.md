@@ -2,6 +2,7 @@
 
 Topics Covered:
 
+- Type Conversion vs Type Coercion in JavaScript
 - Arithmetic & Comparison Operators
 - Logical Operators
 - Conditional Statements (`if-else`)
