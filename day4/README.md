@@ -20,11 +20,11 @@
 
 ### Expected Output
 
-<!-- ```bash
+```bash
 Number 2: frequent (appears 4 times)
 Number 5: common (appears 3 times)
 Number 7: rare (appears 1 time)
-``` -->
+```
 
 ## Assignment 2: Student Grade Management Assignment
 
@@ -57,7 +57,11 @@ Number 7: rare (appears 1 time)
 
 ## Expected Output
 
-<!-- ```bash
+```bash
+  Dont expect from here...
+```
+
+```bash
 Student added: Alice, Grade: 95
 Student added: Bob, Grade: 82
 Student added: Charlie, Grade: 78
@@ -71,4 +75,4 @@ Charlie: 78
 
 Class Average: 85
 Class Performance: B
-``` -->
+```
