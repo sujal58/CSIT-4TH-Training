@@ -58,10 +58,6 @@ Number 7: rare (appears 1 time)
 ## Expected Output
 
 ```bash
-  Dont expect from here...
-```
-
-```bash
 Student added: Alice, Grade: 95
 Student added: Bob, Grade: 82
 Student added: Charlie, Grade: 78
