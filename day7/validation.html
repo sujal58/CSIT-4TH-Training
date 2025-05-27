@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9rem;
+        margin-top: -8px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Register</h2>
+      <form id="myForm" novalidate>
+        <input type="text" id="name" placeholder="Name" />
+        <div id="nameError" class="error"></div>
+
+        <input type="email" id="email" placeholder="Email" />
+        <div id="emailError" class="error"></div>
+
+        <input type="password" id="password" placeholder="Password" />
+        <div id="passwordError" class="error"></div>
+
+        <button type="submit">Submit</button>
+      </form>
+      <div>
+        <p id="n"></p>
+        <p id="e"></p>
+        <p id="p"></p>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("myForm");
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+
+      const name = document.getElementById("n");
+      const email = document.getElementById("e");
+      const pass = document.getElementById("p");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // prevent form from submitting
+
+        // Clear previous errors
+        nameError.textContent = "";
+        emailError.textContent = "";
+        passwordError.textContent = "";
+
+        let isValid = true;
+
+        if (nameInput.value.trim() === "") {
+          nameError.textContent = "Name is required";
+          isValid = false;
+        }
+
+        if (emailInput.value.trim() === "") {
+          emailError.textContent = "Email is required";
+          isValid = false;
+        } else if (!emailInput.value.includes("@")) {
+          emailError.textContent = "Email must contain '@'";
+          isValid = false;
+        }
+
+        if (passwordInput.value.trim() === "") {
+          passwordError.textContent = "Password is required";
+          isValid = false;
+        } else if (passwordInput.value.length < 8) {
+          passwordError.textContent = "Password must be at least 8 characters";
+          isValid = false;
+        }
+
+        name.textContent = "Name: " + nameInput.value.trim();
+        email.textContent = "Email: " + emailInput.value.trim();
+        pass.textContent = "Password: " + passwordInput.value.trim();
+
+        if (isValid) {
+          alert("Form submitted successfully!");
+          name.textContent = "";
+          email.textContent = "";
+          pass.textContent = "";
+          form.reset();
+        }
+      });
+    </script>
+  </body>
+</html>

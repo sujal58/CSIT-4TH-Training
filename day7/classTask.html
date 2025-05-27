@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show/Hide Text</title>
+    <style>
+      .dark {
+        background-color: black !important;
+        color: white !important;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+        background-color: #f9f9f9;
+      }
+
+      #text {
+        font-size: 1.2rem;
+        margin: 20px auto;
+        width: 60%;
+        line-height: 1.6;
+        color: black;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Show/Hide Text Example</h1>
+
+    <p id="text">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore dolorem
+      porro modi iusto ex nulla consequatur harum. ut, molestias dolores
+      officiis animi voluptates, alias voluptatum corporis a soluta provident
+      nemo.
+    </p>
+
+    <button id="toggleBtn">Hide</button>
+    <button id="darkbtn">Dark</button>
+
+    <script>
+      const body = document.querySelector("body");
+      const text = document.getElementById("text");
+      const toggleBtn = document.getElementById("toggleBtn");
+      const darkbtn = document.getElementById("darkbtn");
+
+      toggleBtn.addEventListener("click", () => {
+        if (text.style.display === "none") {
+          text.style.display = "block";
+          toggleBtn.textContent = "Hide";
+        } else {
+          text.style.display = "none";
+          toggleBtn.textContent = "Show";
+        }
+      });
+      darkbtn.addEventListener("click", () => {
+        if (darkbtn.textContent == "Dark") {
+          text.style.color = "white";
+          darkbtn.textContent = "Light";
+        } else if (darkbtn.textContent == "Light") {
+          darkbtn.textContent = "Dark";
+          text.style.color = "black";
+        }
+        body.classList.toggle("dark");
+      });
+    </script>
+  </body>
+</html>
