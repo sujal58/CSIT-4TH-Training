@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guess the Flag</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    #country-name {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .flags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .flags img {
+      width: 150px;
+      height: 100px;
+      border: 4px solid transparent;
+      cursor: pointer;
+      transition: transform 0.3s, border 0.3s;
+    }
+
+    .flags img:hover {
+      transform: scale(1.05);
+      border-color: #007bff;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .score {
+      margin-top: 10px;
+      font-size: 1em;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .wrong {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌍 Guess the Flag!</h1>
+  <div id="country-name">Loading...</div>
+  <div class="flags" id="flags-container"></div>
+  <div class="result" id="result"></div>
+  <div class="score" id="score">Score: 0</div>
+
+  <script>
+    const allCountries = [
+      { name: "France", flag: "https://flagcdn.com/w320/fr.png" },
+      { name: "Japan", flag: "https://flagcdn.com/w320/jp.png" },
+      { name: "Brazil", flag: "https://flagcdn.com/w320/br.png" },
+      { name: "Germany", flag: "https://flagcdn.com/w320/de.png" },
+      { name: "India", flag: "https://flagcdn.com/w320/in.png" },
+      { name: "Canada", flag: "https://flagcdn.com/w320/ca.png" },
+      { name: "Australia", flag: "https://flagcdn.com/w320/au.png" },
+      { name: "Italy", flag: "https://flagcdn.com/w320/it.png" },
+      { name: "Mexico", flag: "https://flagcdn.com/w320/mx.png" },
+      { name: "South Korea", flag: "https://flagcdn.com/w320/kr.png" },
+      { name: "Argentina", flag: "https://flagcdn.com/w320/ar.png" },
+      { name: "United States", flag: "https://flagcdn.com/w320/us.png" },
+      { name: "Russia", flag: "https://flagcdn.com/w320/ru.png" },
+      { name: "China", flag: "https://flagcdn.com/w320/cn.png" },
+      { name: "United Kingdom", flag: "https://flagcdn.com/w320/gb.png" },
+      { name: "Spain", flag: "https://flagcdn.com/w320/es.png" },
+      { name: "Portugal", flag: "https://flagcdn.com/w320/pt.png" },
+      { name: "Sweden", flag: "https://flagcdn.com/w320/se.png" },
+      { name: "Norway", flag: "https://flagcdn.com/w320/no.png" },
+      { name: "Netherlands", flag: "https://flagcdn.com/w320/nl.png" },
+      { name: "Greece", flag: "https://flagcdn.com/w320/gr.png" },
+      { name: "Turkey", flag: "https://flagcdn.com/w320/tr.png" },
+      { name: "Egypt", flag: "https://flagcdn.com/w320/eg.png" },
+      { name: "South Africa", flag: "https://flagcdn.com/w320/za.png" },
+      { name: "Indonesia", flag: "https://flagcdn.com/w320/id.png" },
+      { name: "Thailand", flag: "https://flagcdn.com/w320/th.png" },
+    ];
+
+    let remainingQuestions = [...allCountries];
+    let currentAnswer = null;
+    let score = 0;
+
+    const countryNameEl = document.getElementById('country-name');
+    const flagsContainer = document.getElementById('flags-container');
+    const resultEl = document.getElementById('result');
+    const scoreEl = document.getElementById('score');
+
+    function shuffle(array) {
+      return array.sort(() => 0.5 - Math.random());
+    }
+
+    function generateQuestion() {
+      resultEl.textContent = '';
+
+      if (remainingQuestions.length < 3) {
+        countryNameEl.textContent = "🎉 You've completed all questions!";
+        flagsContainer.innerHTML = '';
+        return;
+      }
+
+      const options = shuffle(remainingQuestions).slice(0, 3);
+      const answer = options[Math.floor(Math.random() * 3)];
+      currentAnswer = answer;
+
+      // Remove the answer from future questions
+      remainingQuestions = remainingQuestions.filter(c => c.name !== answer.name);
+
+      countryNameEl.textContent = `Which is the flag of ${answer.name}?`;
+      flagsContainer.innerHTML = '';
+
+      options.forEach(option => {
+        const img = document.createElement('img');
+        img.src = option.flag;
+        img.alt = option.name;
+        img.onclick = () => checkAnswer(option);
+        flagsContainer.appendChild(img);
+      });
+    }
+
+    function checkAnswer(selected) {
+      if (selected.name === currentAnswer.name) {
+        resultEl.textContent = "✅ Correct!";
+        resultEl.className = "result correct";
+        score++;
+      } else {
+        resultEl.textContent = `❌ Wrong! That was ${selected.name}'s flag.`;
+        resultEl.className = "result wrong";
+      }
+
+      scoreEl.textContent = `Score: ${score}`;
+      setTimeout(generateQuestion, 1500);
+    }
+
+    // Start the game
+    generateQuestion();
+  </script>
+
+</body>
+</html>
